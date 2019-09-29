@@ -1,0 +1,87 @@
+﻿@model APIFace2.Models.UploadImagesView
+
+@{
+    ViewData["Title"] = "UploadImage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1> <span class="label label-default">    Seleccione dos  imágenes a cargar para comparar</span></h1>
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="UploadImage"
+              form asp-controller="ImagesCompare" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+            <div class="col-md-12">
+
+                <div class="form-group col-sm-6">
+                    <div class="form-group col-sm-12">
+
+                        @if (@Model.ImagePath != null)
+                        {
+                            <img src="@Url.Content(@Model.ImagePath)"  class="img-thumbnail img-responsive col-xs-12" alt="Cinque Terre" style="height:300px; width: auto; display: block" />                            
+                        }
+                        else
+                        {
+                            <img src="https://www.beautycrew.com.au/media/10498/portrait-taylro.jpg?width=490" class="img-thumbnail img-responsive col-xs-12" alt="Cinque Terre" style="height:300px; width: auto; display: block">
+                        }
+
+                    </div>
+
+                    <div class="col-sm-12">
+                        <label asp-for="ImagePath" class="control-label"></label>
+                        <span asp-validation-for="ImagePath" class="text-danger"></span>
+                        <input type="file" name="ImageFile1" id="ImageFile1" value=" "/>
+                        <br />
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-6">
+                    <div class="form-group  col-sm-12">
+                        @if (@Model.ImagePath2 != null)
+                        {
+                      
+                            <img src="@Url.Content(@Model.ImagePath2)"  class="img-thumbnail img-responsive col-xs-12" alt="Cinque Terre" style="height:300px; width: auto; display: block"  />
+                        }
+                        else
+                        {
+                            <img src="http://fotogen.ch/wp-content/uploads/2018/05/Sabina_w_answear_fotogen_model_blog_1.jpg" class="img-thumbnail img-responsive col-xs-12" alt="Cinque Terre" style="height:300px; width: auto; display: block" >
+                        }
+
+                    </div>
+                    <div class="col-sm-12">
+                        <label asp-for="ImagePath2" class="control-label"></label>
+                        <span asp-validation-for="ImagePath2" class="text-danger"></span>
+                        <input type="file" name="ImageFile2" id="ImageFile2" value=" "/>
+                        <br />
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <div class="col-md-12">
+                <div class="form-group col-lg-offset-2 col-md-4">
+                    <input type="submit" value="Realizar comparación" class="btn btn-primary btn-lg" />
+                </div>
+                <div class="col-md-6">
+                    <h1>Similitud de imágenes: <span class="label label-default">87%</span></h1>
+                </div>
+
+
+            </div>
+
+          
+
+
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
